@@ -13,3 +13,7 @@ import ErdosSar.Greedy
 import ErdosSar.LargeN
 import ErdosSar.OddCount
 import ErdosSar.Triangle
+import ErdosSar.Setup
+import ErdosSar.LongCycle
+import ErdosSar.Short
+import ErdosSar.Main

@@ -41,11 +41,7 @@ def Question1 : Prop :=
 
 /-- The main theorem of the accompanying paper (Theorem 1.1): Question 1 holds for
 sets `A` that omit at most `n/70` elements of `E* (n)`, and in fact all cycle lengths
-`2l+1` with `1 ≤ l ≤ o n` occur.
-
-The paper's proof depends on Jackson's theorem on cycles in bipartite graphs
-(J. Combin. Theory B 30, 1981) and on Erdős–Sárközy (Electron. J. Combin. 4, 1997),
-neither of which is in Mathlib. This statement is **not** proved in Lean here. -/
+`2l+1` with `1 ≤ l ≤ o n` occur. Proved in `ErdosSar.paperTheorem_holds`. -/
 def PaperTheorem : Prop :=
   ∃ n₀ : ℕ, ∀ n ≥ n₀, ∀ A : Finset ℕ, A ⊆ Finset.Icc 1 n → T n < A.card →
     70 * (Estar n \ A).card ≤ n →

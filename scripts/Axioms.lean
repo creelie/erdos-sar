@@ -19,3 +19,8 @@ open ErdosSar
 #print axioms ErdosSar.large_n
 #print axioms ErdosSar.card_fiveSeven_le
 #print axioms ErdosSar.triangle
+#print axioms ErdosSar.long_cycle
+#print axioms ErdosSar.cycle_five
+#print axioms ErdosSar.cycle_seven
+#print axioms ErdosSar.paperTheorem_holds
+#print axioms ErdosSar.question1_restricted
