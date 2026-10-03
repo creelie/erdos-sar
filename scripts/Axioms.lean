@@ -7,3 +7,6 @@ open ErdosSar
 #print axioms coprime_pair
 #print axioms question1_of_paperTheorem
 #print axioms ErdosSar.Jackson.jackson
+#print axioms ErdosSar.abs_card_Nstar_sub_le
+#print axioms ErdosSar.rho_lcm_ge
+#print axioms ErdosSar.factorial_card_bigPrimes_le

@@ -16,7 +16,8 @@ For `A ⊆ {1,…,n}` let `G(A)` be the coprime graph of `A` (distinct `x, y` ar
 | `T(n)` is sharp: the multiples of 2 or 3 have exactly `T(n)` elements and no triangle | `ErdosSar.card_M23`, `ErdosSar.not_hasCycle3_M23` | Lean-verified |
 | The length `2·o(n)+1` is sharp: an odd cycle of length `L` in `G(A)` satisfies `L + 1 ≤ 2·#{odd elements of A}` | `ErdosSar.odd_cycle_length_bound` | Lean-verified |
 | Coprime-pair lemma (paper Lemma 2.7): `o(n)+1` odd numbers in `[1, n]`, `n ≥ 13`, contain a coprime pair | `ErdosSar.coprime_pair` | Lean-verified |
-| Jackson's theorem (1981): `2 ≤ |X| ≤ k`, `|Y| ≤ 2k − 2`, every `x ∈ X` with `≥ k` neighbours in `Y` ⟹ a cycle alternating between `X` and `Y` through all of `X` | `ErdosSar.Jackson.jackson` | Lean-verified (new short proof: maximal cycle plus a counting argument, see the file header) |
+| Jackson's theorem (1981): `2 ≤ #X ≤ k`, `#Y ≤ 2k − 2`, every `x ∈ X` with `≥ k` neighbours in `Y` ⟹ a cycle alternating between `X` and `Y` through all of `X` | `ErdosSar.Jackson.jackson` | Lean-verified (new short proof: maximal cycle plus a counting argument, see the file header) |
+| Counting lemma (paper Lemma 2.3, with error `2^ω'(m) − 1/3`), proved by induction on the prime set instead of Möbius inversion; bounds `ρ'(m) ≥ 1/(ω'(m)+1)`, `(ω'(m)+1)! ≤ m`, `ρ'(lcm(a,b)) ≥ ρ'(a)ρ'(b)` | `ErdosSar.abs_card_Nstar_sub_le` and `ErdosSar/Rho.lean` | Lean-verified |
 | Moment-bound constants of paper Lemma 2.4 (`≤ 5.82·10⁻⁴`, `≤ 3.09·10⁻⁴`) | `verification/constants_interval.py` | Certified with outward-rounded interval arithmetic (not in Lean) |
 
 "Lean-verified" means the theorem builds with Lean 4 and Mathlib, with no `sorry`, and
@@ -40,6 +41,7 @@ and `Quot.sound`. CI re-checks this on every push.
 - `ErdosSar/CoprimePair.lean`: paper Lemma 2.7.
 - `ErdosSar/Statements.lean`: Theorem 1.1 implies the restricted Question 1.
 - `ErdosSar/Jackson.lean`: Jackson's theorem on cycles in bipartite graphs.
+- `ErdosSar/Counting.lean`, `ErdosSar/Rho.lean`: counting in `E*(n)`, the density `ρ'`.
 - `paper/`: the paper (LaTeX source and PDF).
 - `code/`: the scripts that accompany the paper.
 - `verification/constants_interval.py`: rigorous recheck of the Lemma 2.4 constants.
