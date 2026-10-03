@@ -9,3 +9,7 @@ import ErdosSar.Moment
 import ErdosSar.Numerics
 import ErdosSar.HardCount
 import ErdosSar.Assembly
+import ErdosSar.Greedy
+import ErdosSar.LargeN
+import ErdosSar.OddCount
+import ErdosSar.Triangle

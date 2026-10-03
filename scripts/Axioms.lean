@@ -15,3 +15,7 @@ open ErdosSar
 #print axioms ErdosSar.card_phi_eleven_le
 #print axioms ErdosSar.hasCycle_of_list
 #print axioms ErdosSar.assembly
+#print axioms ErdosSar.greedy_choice
+#print axioms ErdosSar.large_n
+#print axioms ErdosSar.card_fiveSeven_le
+#print axioms ErdosSar.triangle
