@@ -10,3 +10,6 @@ open ErdosSar
 #print axioms ErdosSar.abs_card_Nstar_sub_le
 #print axioms ErdosSar.rho_lcm_ge
 #print axioms ErdosSar.factorial_card_bigPrimes_le
+#print axioms ErdosSar.card_phiT_le
+#print axioms ErdosSar.card_rho_le
+#print axioms ErdosSar.card_phi_eleven_le

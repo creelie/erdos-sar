@@ -5,3 +5,6 @@ import ErdosSar.Statements
 import ErdosSar.Jackson
 import ErdosSar.Counting
 import ErdosSar.Rho
+import ErdosSar.Moment
+import ErdosSar.Numerics
+import ErdosSar.HardCount
