@@ -1,0 +1,20 @@
+name: Lean build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+      - name: Check axioms
+        run: |
+          lake env lean scripts/Axioms.lean | tee axioms.txt
+          if grep -v "\[propext, Classical.choice, Quot.sound\]" axioms.txt | grep -q "depends on axioms"; then
+            echo "Non-standard axiom found"; exit 1
+          fi
+          if grep -q "sorryAx" axioms.txt; then echo "sorry found"; exit 1; fi

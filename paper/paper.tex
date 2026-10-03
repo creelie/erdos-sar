@@ -1,0 +1,289 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\rp}{\rho'}
+\newcommand{\Es}{E^{*}}
+
+\title[A problem of Erd\H{o}s and S\'ark\"ozy]{On a problem of Erd\H{o}s and S\'ark\"ozy on odd cycles\\ in coprime graphs}
+\author{Deep Bhattacharjee}
+\address{Formerly, Electro-Gravitational Space Propulsion Laboratory (EGSPL), Bhubaneswar, Odisha 751030, India}
+\email{d.bhattacharjee@erl-forschung.de}
+\keywords{coprime graph, odd cycles, Erd\H{o}s--S\'ark\"ozy problem, Jackson's theorem}
+\subjclass[2020]{05C38, 11B75, 05D05}
+
+\begin{document}
+\begin{abstract}
+We prove that if $n$ is large, $A\subseteq\{1,\dots,n\}$ has more than $\lfloor n/2\rfloor+\lfloor n/3\rfloor-\lfloor n/6\rfloor$ elements, and $A$ omits at most $n/70$ of the integers $w\equiv 2,4\pmod 6$, then the coprime graph of $A$ contains every odd cycle of length at most $n/3+1$. This answers the question of Erd\H{o}s and S\'ark\"ozy (Erd\H{o}s Problem~\#883, Question~1) for all sets of this kind, which include the extremal examples. The case in which more than $n/70$ of these integers are missing remains open.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+
+For $A\subseteq[n]:=\{1,\dots,n\}$ let $G(A)$ denote the \emph{coprime graph} of $A$: its vertex set is $A$ and $x\ne y$ are adjacent if $\gcd(x,y)=1$. Put
+\[
+T(n)=\Big\lfloor\frac n2\Big\rfloor+\Big\lfloor\frac n3\Big\rfloor-\Big\lfloor\frac n6\Big\rfloor ,
+\qquad o(n)=\Big\lfloor\frac n3\Big\rfloor-\Big\lfloor\frac n6\Big\rfloor ,
+\]
+so that $T(n)$ is the number of integers in $[n]$ divisible by $2$ or $3$, and $o(n)$ is the number of odd multiples of $3$ in $[n]$. The set of multiples of $2$ or $3$ shows that $|A|\le T(n)$ does not force a triangle. Erd\H{o}s and S\'ark\"ozy \cite{ES97} proved that $|A|>T(n)$ forces all odd cycles $C_{2l+1}$ with $l\le cn$, for a small absolute constant $c>0$ and $n\ge n_0$, and asked whether the range can be extended to all lengths at most $n/3+1$. This is Question~1 of Erd\H{o}s Problem \#883 \cite{EP883}. The bound would be best possible: if $A$ consists of all even numbers together with $o(n)+1$ odd numbers, then, since even numbers are pairwise non-adjacent, a cycle with $L$ vertices contains at least $\lceil L/2\rceil$ odd vertices, so every odd cycle has length at most $2o(n)+1$.
+
+The present note settles the question in the regime that contains these extremal configurations.
+
+\begin{theorem}\label{thm:main}
+There is $n_0$ such that the following holds for every $n\ge n_0$. Let $A\subseteq[n]$ satisfy $|A|\ge T(n)+1$, and suppose that at most $n/70$ integers $w\in[n]$ with $w\equiv 2,4\pmod 6$ are missing from $A$. Then $G(A)$ contains a cycle of length $2l+1$ for every integer $l$ with $1\le l\le o(n)$. In particular it contains every odd cycle of length at most $n/3+1$.
+\end{theorem}
+
+Since $o(n)\ge n/6-1$, every odd length up to $n/3-1$ is covered, and every odd length $L\le n/3+1$ satisfies $(L-1)/2\le \lfloor n/6\rfloor\le o(n)$; so the last sentence follows from the first. The constant $n_0$ is effective; we do not attempt to compute it (all requirements on $n$ are of the form ``$n$ is large'' in explicit elementary inequalities, see Section~\ref{sec:large}).
+
+\begin{remark}
+Theorem~\ref{thm:main} does not settle Question~1 in full: a set $A$ with $|A|>T(n)$ may omit many integers $w\equiv 2,4\pmod 6$, and then the supply of even connectors shrinks while the number of odd elements grows. The remaining case is discussed in Section~\ref{sec:open}.
+\end{remark}
+
+\subsection*{Strategy}
+Write $O$ for the set of odd elements of $A$. Cycles of length at most $9$ are supplied by the theorem of Erd\H{o}s and S\'ark\"ozy (Section~\ref{sec:small}). For long cycles we choose $l+1$ odd vertices and look for a cycle that alternates between odd vertices and even numbers $w\equiv 2,4\pmod 6$, except for exactly one edge joining two coprime odd vertices; such a cycle has length $2l+1$. The alternating part is produced by Jackson's theorem on cycles in bipartite graphs (Theorem~\ref{thm:jackson}), which needs every odd vertex to be coprime to more than half of the available even numbers. An odd $z$ is coprime to a proportion $\rp(z)=\prod_{p\mid z,\,p\ge5}(1-1/p)$ of the numbers $w\equiv 2,4\pmod 6$, so the odd numbers with $\rp(z)<0.56$ (``hard'' numbers) must be treated separately; a moment estimate (Lemma~\ref{lem:tail}) shows there are at most $6\cdot 10^{-4}n$ of them, and each is embedded into a short path between two ``very easy'' odd numbers, which is then treated as a single vertex. Missing even numbers can destroy the neighbourhoods of hard numbers; we show that fewer such numbers are damaged than there are surplus odd elements, so they can simply be left out.
+
+\section{Notation and tools}
+
+Throughout, $p$ denotes a prime. For a positive integer $m$ let
+\[
+\rp(m)=\prod_{p\mid m,\ p\ge5}\Big(1-\frac1p\Big),\qquad \omega(m)=\#\{p:\ p\mid m\}.
+\]
+Clearly $\rp(\mathrm{lcm}(m_1,m_2))\ge \rp(m_1)\rp(m_2)$, since every prime factor of the least common multiple occurs in $m_1$ or in $m_2$ and all factors are at most $1$. Also $\rp(m)\ge\varphi(m)/m$.
+Let
+\[
+\Es=\Es(n)=\{w\in[n]:\ w\equiv 2 \text{ or } 4 \pmod 6\}
+\]
+be the set of even numbers in $[n]$ not divisible by $3$; $|\Es|=\lfloor n/2\rfloor-\lfloor n/6\rfloor\in[n/3-1,\,n/3+1]$. For $m\ge1$ put $N^*(m)=\{w\in\Es:\gcd(w,m)=1\}$. Note that for odd $z$ and $w\in\Es$, $w$ and $z$ are adjacent in $G([n])$ if and only if $w\in N^*(z)$; and $w\in N^*(z_1)\cap N^*(z_2)$ if and only if $w\in N^*(\mathrm{lcm}(z_1,z_2))$.
+
+\subsection{Jackson's theorem}
+For a bipartite graph with parts $X,Y$ we use the following result of Jackson \cite{Ja81}.
+
+\begin{theorem}[Jackson \cite{Ja81}]\label{thm:jackson}
+Let $H$ be a bipartite graph with parts $X$ and $Y$, where $|X|\ge2$, and let $k\ge 2$ be an integer such that every vertex of $X$ has at least $k$ neighbours in $Y$. If $|X|\le k$ and $|Y|<2k-2$, then $H$ contains a cycle of length $2|X|$; that is, a cycle through all vertices of $X$.
+\end{theorem}
+
+(Jackson states the condition on $Y$ as $|Y|\le 2k-2$ in some sources and $|Y|<2k-2$ in others; we only use it with $|Y|\le 2k-3$, which satisfies both.)
+
+\subsection{Elementary arithmetic estimates}
+
+We use two classical explicit bounds: for every integer $m\ge3$,
+\begin{equation}\label{eq:robin}
+\omega(m)\le 1.3841\,\frac{\log m}{\log\log m}\qquad\text{(Robin \cite{Ro83})},
+\end{equation}
+\begin{equation}\label{eq:rs}
+\frac{\varphi(m)}{m}\ge \frac{1}{e^{\gamma}\log\log m+\frac{2.51}{\log\log m}}\qquad\text{(Rosser--Schoenfeld \cite{RS62})}.
+\end{equation}
+Since $\log m/\log\log m$ increases for $m\ge e^e$, \eqref{eq:robin} gives, for $n$ large and every $m\le n^2$,
+\begin{equation}\label{eq:2omega}
+2^{\omega(m)}\le \exp\Big(1.3841\,\log 2\cdot\frac{2\log n}{\log(2\log n)}\Big)\le \sqrt n ,
+\end{equation}
+because the exponent is at most $\frac12\log n$ as soon as $\log(2\log n)\ge 3.84$. Similarly \eqref{eq:rs} gives, for every $m\le n^2$ and $n$ large,
+\begin{equation}\label{eq:rmin}
+\rp(m)\ \ge\ r(n):=\frac{1}{2\log\log n+3}.
+\end{equation}
+
+\begin{lemma}[Counting]\label{lem:count}
+For every $m\ge1$,
+\[
+|N^*(m)|>\frac n3\,\rp(m)-2^{\omega(m)} .
+\]
+In particular, for $n$ large and every $m\le n^2$, $|N^*(m)|>\frac n3\rp(m)-\sqrt n$.
+\end{lemma}
+
+\begin{proof}
+Let $m'$ be the product of the primes $p\ge5$ dividing $m$. An element $w\in\Es$ is coprime to $m$ if and only if it is coprime to $m'$ (it is even and not divisible by $3$, and $2,3$ are the only other possible common primes). For a squarefree $d$ with $\gcd(d,6)=1$, the number of $w\in\Es$ with $d\mid w$ equals
+\[
+\#\{w\le n:2d\mid w\}-\#\{w\le n:6d\mid w\}=\Big\lfloor\frac n{2d}\Big\rfloor-\Big\lfloor\frac n{6d}\Big\rfloor=\frac{n}{3d}+\theta_d,\qquad |\theta_d|<1 .
+\]
+By inclusion--exclusion,
+\[
+|N^*(m)|=\sum_{d\mid m'}\mu(d)\Big(\frac n{3d}+\theta_d\Big)=\frac n3\prod_{p\mid m'}\Big(1-\frac1p\Big)+\sum_{d\mid m'}\mu(d)\theta_d ,
+\]
+and the last sum has absolute value less than $2^{\omega(m')}\le 2^{\omega(m)}$. The second statement follows from \eqref{eq:2omega}.
+\end{proof}
+
+\subsection{How many odd numbers are hard}
+
+\begin{lemma}[Moment bound]\label{lem:tail}
+For $0<x\le 1$ and every integer $s\ge1$, let $\mathcal F_s(x)=\{z\le n: \prod_{p\mid z,\ p\ge s}(1-1/p)\le x\}$. Then for every integer $m\ge1$,
+\[
+|\mathcal F_s(x)|\ \le\ n\,x^{m}\,\Pi_{s,m},\qquad \Pi_{s,m}:=\prod_{p\ge \max(s,5)}\Big(1+\frac{(1-1/p)^{-m}-1}{p}\Big).
+\]
+Numerically,
+\[
+0.56^{40}\,\Pi_{5,40}<6\cdot10^{-4},\qquad 0.75^{60}\,\Pi_{11,60}<4\cdot 10^{-4}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $g$ be the multiplicative function supported on squarefree integers all of whose prime factors are $\ge\max(s,5)$, with $g(p)=(1-1/p)^{-m}-1\ge0$ for such primes. Then $h=1*g$ satisfies $h(z)=\prod_{p\mid z,\,p\ge \max(s,5)}(1-1/p)^{-m}$, so $h(z)\ge x^{-m}$ for $z\in\mathcal F_s(x)$ when $s\ge5$ (we only use $s=5$, where the product is $\rp(z)$, and $s=11$). Hence
+\[
+x^{-m}|\mathcal F_s(x)|\le\sum_{z\le n}h(z)=\sum_{d\le n}g(d)\Big\lfloor\frac nd\Big\rfloor\le n\sum_{d\ge1}\frac{g(d)}d=n\,\Pi_{s,m}.
+\]
+For the numerical values we computed the finite product over primes $p<P_0=10^7$ in double precision (the relative rounding error is below $10^{-9}$). For $p\ge P_0$ we have $(1-1/p)^{-m}\le e^{m/(p-1)}$ and $e^t-1\le 2t$ for $0\le t\le1$, so $g(p)\le 2m/(p-1)$ and
+\[
+\sum_{p\ge P_0}\log\Big(1+\frac{g(p)}p\Big)\le \sum_{j\ge P_0}\frac{2m}{j(j-1)}=\frac{2m}{P_0-1}.
+\]
+This gives $0.56^{40}\Pi_{5,40}\le 5.82\cdot10^{-4}$ and $0.75^{60}\Pi_{11,60}\le 3.09\cdot 10^{-4}$.
+\end{proof}
+
+\begin{definition}
+An odd number $z\le n$ is \emph{hard} if $\rp(z)<0.56$, \emph{ordinary} if $\rp(z)\ge0.56$, and \emph{easy} if $\rp(z)\ge 0.75$.
+\end{definition}
+
+\begin{corollary}\label{cor:counts}
+For $n$ large:
+\begin{enumerate}
+\item[(a)] for every $x\le 0.56$ the number of $z\le n$ with $\rp(z)\le x$ is at most $1.04\cdot 10^{-3}\,x\,n$; in particular there are at most $5.82\cdot10^{-4}n$ hard numbers;
+\item[(b)] the number of odd $z\le n$ that are not easy is at most $0.1578\,n$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+(a) By Lemma~\ref{lem:tail} with $s=5$, $m=40$, the number is at most $n(x/0.56)^{40}\cdot 0.56^{40}\Pi_{5,40}\le 5.82\cdot10^{-4}\,n\,(x/0.56)$, and $5.82\cdot 10^{-4}/0.56<1.04\cdot10^{-3}$.
+(b) If $z$ is odd and $\rp(z)<0.75$, then either $5\mid z$ or $7\mid z$, or $z$ is coprime to $35$, in which case $\prod_{p\mid z,\,p\ge11}(1-1/p)=\rp(z)<0.75$. The odd multiples of $5$ or $7$ in $[n]$ number at most $\frac n{10}+\frac n{14}-\frac n{70}+3=\frac{11n}{70}+3$, and by Lemma~\ref{lem:tail} with $s=11$, $m=60$ the remaining ones number at most $3.09\cdot10^{-4}n$. Since $11/70<0.15715$, the total is below $0.1578n$ for large $n$.
+\end{proof}
+
+\subsection{A coprime pair}
+
+\begin{lemma}\label{lem:pair}
+Let $n\ge 13$ and let $O$ be a set of odd numbers in $[n]$ with $|O|\ge o(n)+1$. Then $O$ contains two coprime elements.
+\end{lemma}
+
+\begin{proof}
+Partition the odd numbers of $[n]$ into the groups $Q_k=\{6k+1,6k+3,6k+5\}\cap[n]$, $0\le k\le K:=\lfloor (n-1)/6\rfloor$. Any two elements of one group differ by $2$ or $4$, hence are coprime (a common divisor divides the difference and is odd). The number of groups is $K+1$, while $o(n)=\#\{k\ge 0:6k+3\le n\}=\lfloor (n-3)/6\rfloor+1\ge K$. If $|O|>K+1$, two elements lie in a common group and we are done. Otherwise $|O|=K+1=o(n)+1$, which forces $\lfloor (n-3)/6\rfloor=\lfloor (n-1)/6\rfloor-1$, i.e. $6K+1\le n<6K+3$; then $Q_K=\{6K+1\}$ and $O$ meets every group in exactly one element, so $6K+1\in O$. Suppose $O$ has no coprime pair. Its element in $Q_0=\{1,3,5\}$ is not $1$. Since $n\ge13$, $Q_1=\{7,9,11\}$, and its element must share a prime with the element of $Q_0$; the only possibility is the pair $3,9$. But $\gcd(3,6K+1)=1$ and $6K+1\ne 3$, a contradiction.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:main}: set-up and short cycles}\label{sec:small}
+
+Fix $n\ge n_0$ and $A$ as in Theorem~\ref{thm:main}. Let $O$ be the set of odd elements of $A$, let $d$ be the number of even numbers of $[n]$ missing from $A$, and let $D=\Es\setminus A$, $d_E=|D|\le n/70$. Then $d\ge d_E$ and
+\begin{equation}\label{eq:Osize}
+|O|=|A|-(\lfloor n/2\rfloor-d)\ \ge\ T(n)+1-\lfloor n/2\rfloor+d=o(n)+1+d\ \ge\ o(n)+1+d_E .
+\end{equation}
+
+\emph{Short cycles.} Erd\H{o}s and S\'ark\"ozy \cite[Theorem~1]{ES97} proved that there are absolute constants $c>0$ and $n_1$ such that for $n\ge n_1$ every $A\subseteq[n]$ with $|A|>T(n)$ (their $f(n,2)$ is our $T(n)$) satisfies $C_{2l+1}\subseteq G(A)$ for all positive integers $l\le cn$. Taking $n_0\ge\max(n_1,4/c)$ we obtain the cycles of length $2l+1$ for $1\le l\le 4$. It remains to treat $5\le l\le o(n)$.
+
+\emph{Damaged numbers.} For odd $z\le n$ put $a(z)=|N^*(z)\cap D|$, the number of its neighbours in $\Es$ that are missing from $A$. Call a hard $z$ \emph{damaged} if $a(z)>\frac n8\rp(z)$.
+
+\begin{lemma}\label{lem:damaged}
+At most $0.0084\,d_E$ odd numbers in $[n]$ are damaged. Consequently $O'=O\setminus\{\text{damaged}\}$ satisfies $|O'|\ge o(n)+1\ge n/6$.
+\end{lemma}
+
+\begin{proof}
+If $z$ is damaged then $\frac n8\rp(z)<a(z)\le d_E$, so $\rp(z)<8d_E/n$; also $\rp(z)<0.56$. By Corollary~\ref{cor:counts}(a) applied with $x=\min(8d_E/n,0.56)$, the number of such $z$ is at most $1.04\cdot10^{-3}\cdot (8d_E/n)\cdot n<0.0084\,d_E$. The second statement follows from \eqref{eq:Osize}.
+\end{proof}
+
+By Lemma~\ref{lem:pair} applied to $O'$ there are coprime $a,b\in O'$; we fix them. For every $z\in O'$ and every easy $y$,
+\begin{equation}\label{eq:surv}
+|N^*(\mathrm{lcm}(y,z))\cap A|\ \ge\ \frac n8\,\rp(z)-\sqrt n .
+\end{equation}
+Indeed $|N^*(\mathrm{lcm}(y,z))|>\frac n4\rp(z)-\sqrt n$ by Lemma~\ref{lem:count}, and at most $a(z)$ of these numbers are missing from $A$; if $z$ is hard then $a(z)\le\frac n8\rp(z)$, and if $z$ is not hard then $a(z)\le d_E\le n/70<\frac n8\cdot0.56$.
+
+\section{Proof of Theorem~\ref{thm:main}: long cycles}\label{sec:long}
+
+Now fix $l$ with $5\le l\le o(n)$. All estimates below hold once $n$ is larger than an absolute constant; they are collected in Section~\ref{sec:large}.
+
+\subsection{Choice of the odd vertices}
+List the elements of $O'\setminus\{a,b\}$ so that the easy ones come first, then the ordinary ones that are not easy, then the hard ones (inside each class in any order). Let $X_0$ consist of $a$, $b$ and the first $l-1$ elements of this list; this is possible because $|O'|\ge o(n)+1\ge l+1$ (Lemma~\ref{lem:damaged}), and $|X_0|=l+1$. Let $z_1,\dots,z_h$ be the hard elements of $X_0\setminus\{a,b\}$, ordered so that $\rp(z_1)\le\dots\le\rp(z_h)$. By Corollary~\ref{cor:counts}(a), $h\le 5.82\cdot10^{-4}n$. No element of $X_0$ is damaged.
+
+Say the closing is \emph{simple} if $a$ and $b$ are both easy, and \emph{partnered} otherwise; put $\varepsilon=0$ in the first case and $\varepsilon=1$ in the second.
+
+\begin{lemma}\label{lem:partners}
+$X_0\setminus\{a,b\}$ contains at least $2h+2\varepsilon$ easy elements.
+\end{lemma}
+
+\begin{proof}
+By Corollary~\ref{cor:counts}(b) and $|O'|\ge n/6$, the set $O'\setminus\{a,b\}$ contains at least $n/6-0.1578n-2\ge 0.0088n-2$ easy elements. If $h=0$ we need at most $2$ of them, and since $l-1\ge 2$ and easy elements are listed first, $X_0$ contains two. If $h>0$, then $X_0$ contains a hard element of the list, so it contains every element listed before it, in particular all easy elements of $O'\setminus\{a,b\}$; and $0.0088n-2\ge 2\cdot 5.82\cdot10^{-4}n+2\ge 2h+2$.
+\end{proof}
+
+Using Lemma~\ref{lem:partners}, choose distinct easy elements of $X_0\setminus\{a,b\}$: two elements $y_a,y_b$ if the closing is partnered, and two elements $y_{i,1},y_{i,2}$ for each $i=1,\dots,h$ (``partners''). Let $R$ be the set of elements of $X_0$ that are neither $a$, $b$, a hard $z_i$, nor a partner. Every element of $R$ is ordinary (non-hard).
+
+\subsection{Choice of the internal connectors}
+We now choose distinct elements of $\Es\cap A$, collected in a set $U_c$, greedily.
+
+\emph{Step 0.} If the closing is partnered, choose $w_a\in N^*(\mathrm{lcm}(y_a,a))\cap A$ and $w_b\in N^*(\mathrm{lcm}(b,y_b))\cap A$ with $w_a\ne w_b$.
+
+\emph{Step $i$ ($1\le i\le h$).} Choose $w_{i,1}\in N^*(\mathrm{lcm}(y_{i,1},z_i))\cap A$ and $w_{i,2}\in N^*(\mathrm{lcm}(z_i,y_{i,2}))\cap A$, distinct from each other and from all previously chosen connectors.
+
+\begin{lemma}\label{lem:greedy}
+All these choices are possible. Consequently $|U_c|=2h+2\varepsilon\le 1.164\cdot 10^{-3}n+2$.
+\end{lemma}
+
+\begin{proof}
+All least common multiples involved are at most $n^2$, and $a,b,z_i\in O'$, so \eqref{eq:surv} applies. For step $0$ it gives at least $\frac n8\rp(a)-\sqrt n\ge\frac n8r(n)-\sqrt n\ge 2$ candidates for $w_a$ by \eqref{eq:rmin}, and likewise for $w_b$. For step $i$ write $x=\rp(z_i)<0.56$; each of the two candidate sets has at least $\frac n8x-\sqrt n$ elements. The connectors chosen before step $i$ number at most $2+2(i-1)$, and $i-1$ is at most the number of $z\le n$ with $\rp(z)\le x$, which by Corollary~\ref{cor:counts}(a) is at most $1.04\cdot10^{-3}xn$. Hence at least
+\[
+\frac n8x-\sqrt n-2-2.08\cdot10^{-3}xn-1\ \ge\ 0.1229\,xn-\sqrt n-3\ \ge\ 0.1229\,r(n)\,n-\sqrt n-3\ >\ 1
+\]
+candidates remain for each of $w_{i,1},w_{i,2}$ (the extra $-1$ accounts for $w_{i,1}$ when choosing $w_{i,2}$), using $x\ge r(n)$ and $n$ large.
+\end{proof}
+
+\subsection{Super-vertices and the auxiliary bipartite graph}
+Define the following paths in $G(A)$; each is a path because each listed connector lies in $N^*$ of the least common multiple of its two neighbours, and $a\sim b$:
+\[
+S_0=\begin{cases} a,\,b & \text{(simple closing)},\\ y_a,\,w_a,\,a,\,b,\,w_b,\,y_b & \text{(partnered closing)},\end{cases}\qquad
+S_i=y_{i,1},\,w_{i,1},\,z_i,\,w_{i,2},\,y_{i,2}\quad(1\le i\le h).
+\]
+These paths are vertex-disjoint, their odd vertices are exactly the elements of $X_0\setminus R$, and their even vertices are exactly $U_c$. Each path $S$ has two \emph{ends} $p_S,q_S$ (its first and last vertex), both easy (in the simple case the ends $a,b$ are easy by definition). Hence
+\begin{equation}\label{eq:endrho}
+\rp(\mathrm{lcm}(p_S,q_S))\ \ge\ 0.75^2=0.5625 .
+\end{equation}
+
+Let $X'=R\cup\{S_0,S_1,\dots,S_h\}$, where each $S_i$ is regarded as a single new vertex, and let $B'=(\Es\cap A)\setminus U_c$. Let $\mathcal H$ be the bipartite graph with parts $X'$ and $B'$ in which $x\in R$ is joined to $\beta\in B'$ if $\beta\in N^*(x)$, and $S\in\{S_0,\dots,S_h\}$ is joined to $\beta$ if $\beta\in N^*(\mathrm{lcm}(p_S,q_S))$.
+
+\begin{lemma}\label{lem:degrees}
+Let $k=\lceil 0.170\,n\rceil$. Then every vertex of $X'$ has at least $k$ neighbours in $\mathcal H$, $2\le|X'|\le k$, and $k\le|B'|\le 2k-3$.
+\end{lemma}
+
+\begin{proof}
+For $x\in R$ we have $\rp(x)\ge 0.56$, and for a super-vertex \eqref{eq:endrho} holds. By Lemma~\ref{lem:count}, at most $d_E\le n/70$ elements of $N^*(\cdot)$ are missing from $A$, and at most $|U_c|$ are used as connectors, so each vertex of $X'$ has at least
+\[
+\frac n3\cdot0.56-\sqrt n-\frac n{70}-|U_c|\ \ge\ (0.18666-0.01429-0.00117)\,n-\sqrt n-2\ \ge\ 0.1712\,n-\sqrt n-2\ \ge\ k
+\]
+neighbours in $B'$. Next, $|X'|\le|X_0|=l+1\le o(n)+1\le n/6+1\le k$. Counting, $|X'|=(l+1)-(2+h+2h+2\varepsilon)+(1+h)=l-2h-2\varepsilon$. If $h=0$ this is at least $l-2\ge 3$. If $h>0$ then, as in the proof of Lemma~\ref{lem:partners}, $X_0$ contains every non-hard element of $O'$, so $l+1\ge |O'|-5.82\cdot10^{-4}n\ge n/6-5.82\cdot10^{-4}n$ and $|X'|\ge n/6-1.8\cdot10^{-3}n-3\ge 2$. Finally $|B'|\le|\Es|\le n/3+1\le 0.34n-3\le 2k-3$, and $|B'|\ge n/3-1-n/70-|U_c|\ge 0.317n\ge k$.
+\end{proof}
+
+\subsection{Conclusion}
+By Lemma~\ref{lem:degrees} and Theorem~\ref{thm:jackson}, $\mathcal H$ contains a cycle $C$ of length $2|X'|$ which passes through every vertex of $X'$ and alternates between $X'$ and $B'$. For each super-vertex $S$ on $C$, let $\beta,\beta'\in B'$ be its two neighbours on $C$. Both lie in $N^*(\mathrm{lcm}(p_S,q_S))$, hence $\beta$ is coprime to $p_S$ and $\beta'$ is coprime to $q_S$. Replace the segment $\beta,S,\beta'$ of $C$ by the path $\beta,S,\beta'$ in which $S$ is now traversed from $p_S$ to $q_S$. Every $x\in R$ on $C$ is adjacent in $G(A)$ to its two neighbours on $C$, which lie in $N^*(x)$.
+
+The result is a closed walk in $G(A)$: its vertices are elements of $B'\cup U_c\subseteq\Es\cap A$ and of $X_0\subseteq O\subseteq A$. It has no repeated vertex, because the paths $S_i$ are disjoint from each other, from $R$, and from $B'$ (their even vertices form $U_c$, which was removed). Hence it is a cycle of $G(A)$, of length
+\[
+2|X'|+\sum_{i=0}^h(|S_i|-1)=2(l-2h-2\varepsilon)+(1+4\varepsilon)+4h=2l+1 ,
+\]
+since $|S_0|=2+4\varepsilon$ and $|S_i|=5$ for $i\ge1$. Together with the short cycles of Section~\ref{sec:small}, this proves Theorem~\ref{thm:main}. \qed
+
+\section{The conditions on $n$}\label{sec:large}
+
+For the reader's convenience we list every place where $n$ was assumed large; each is an explicit inequality between elementary functions of $n$, so $n_0$ is effective.
+\begin{enumerate}
+\item $\log(2\log n)\ge3.84$, giving $2^{\omega(m)}\le\sqrt n$ for $m\le n^2$ in \eqref{eq:2omega};
+\item $e^{\gamma}(\log\log n+\log2)+2.51/\log\log(n^2)\le 2\log\log n+3$, giving \eqref{eq:rmin};
+\item $n\ge 13$ (Lemma~\ref{lem:pair}), $n\ge n_1$ and $cn\ge 4$ with $c,n_1$ from \cite[Theorem~1]{ES97} (Section~\ref{sec:small});
+\item $11n/70+3+3.09\cdot10^{-4}n\le 0.1578n$ (Corollary~\ref{cor:counts}(b));
+\item $0.0088n-2\ge 1.164\cdot10^{-3}n+2$ (Lemma~\ref{lem:partners});
+\item $0.1229\,r(n)\,n\ge\sqrt n+5$ and $\frac n8r(n)\ge\sqrt n+2$ (Lemma~\ref{lem:greedy});
+\item $0.1712n-\sqrt n-2\ge\lceil0.170n\rceil$, $n/6+1\le 0.170n$, $n/3+1\le 0.34n-3$ and $0.3175n-3\ge\lceil 0.170n\rceil$ (Lemma~\ref{lem:degrees}).
+\end{enumerate}
+
+\section{What remains for Question~1}\label{sec:open}
+
+The hypothesis $|\Es\setminus A|\le n/70$ is used in exactly two places: in \eqref{eq:surv} (to bound $a(z)$ for non-hard $z$) and in Lemma~\ref{lem:degrees}, where every vertex of $X'$ must keep more than half of $B'$ and at least $|X'|\approx n/6$ neighbours. If $A$ omits a set $D\subseteq\Es$ of size $\delta n$, these requirements become $\frac n3\rp(x)-\delta n>\frac12(\frac n3-\delta n)$ and $\frac n3\rp(x)-\delta n\ge \frac n6$ in the worst case, where all of $D$ lies in the neighbourhood of $x$. For $\delta$ of order $1/10$ and the longest cycles ($l$ close to $n/6$) they fail even for easy $x$, and once $|\Es\cap A|<n/6$ no cycle alternating between odd numbers and elements of $\Es$ can contain $n/6$ odd numbers at all. In that regime the surplus $|O|-o(n)-1\ge |D|$ of odd elements must be used, and the cycles must contain edges between odd numbers (for instance between an odd multiple of $3$ and an element of $A$ coprime to $6$). We have not found an argument controlling these edges for an arbitrary set of surplus odd numbers, so Question~1 remains open when $|\Es\setminus A|>n/70$.
+
+\section*{Code availability}
+The scripts used for the numerical constants of Lemma~\ref{lem:tail} (\texttt{constants.py}), the exhaustive check of Question~1 for $n\le 21$ (\texttt{bruteforce\_small\_n.py}) and the empirical distribution of $\rp$ (\texttt{rho\_distribution.py}) are distributed with this paper.
+
+\begin{thebibliography}{9}
+\bibitem{EP883} T.~F.~Bloom, \emph{Erd\H{o}s Problem \#883}, \url{https://www.erdosproblems.com/883}.
+\bibitem{ES97} P.~Erd\H{o}s and G.~N.~S\'ark\"ozy, \emph{On cycles in the coprime graph of integers}, Electron. J. Combin. \textbf{4}(2) (1997), \#R8.
+\bibitem{Ja81} B.~Jackson, \emph{Cycles in bipartite graphs}, J. Combin. Theory Ser. B \textbf{30} (1981), 332--342.
+\bibitem{Ro83} G.~Robin, \emph{Estimation de la fonction de Tchebychef $\theta$ sur le $k$-i\`eme nombre premier et grandes valeurs de la fonction $\omega(n)$ nombre de diviseurs premiers de $n$}, Acta Arith. \textbf{42} (1983), 367--389.
+\bibitem{RS62} J.~B.~Rosser and L.~Schoenfeld, \emph{Approximate formulas for some functions of prime numbers}, Illinois J. Math. \textbf{6} (1962), 64--94.
+\end{thebibliography}
+\end{document}
