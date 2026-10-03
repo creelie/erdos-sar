@@ -8,3 +8,4 @@ import ErdosSar.Rho
 import ErdosSar.Moment
 import ErdosSar.Numerics
 import ErdosSar.HardCount
+import ErdosSar.Assembly

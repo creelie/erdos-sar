@@ -13,3 +13,5 @@ open ErdosSar
 #print axioms ErdosSar.card_phiT_le
 #print axioms ErdosSar.card_rho_le
 #print axioms ErdosSar.card_phi_eleven_le
+#print axioms ErdosSar.hasCycle_of_list
+#print axioms ErdosSar.assembly
