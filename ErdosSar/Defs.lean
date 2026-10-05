@@ -40,7 +40,7 @@ Electron. J. Combin. 4(2) (1997), R8, doi:10.37236/1323. Their main theorem give
 `l ≤ c n`, and they ask whether `c = 1/6` is admissible; `l ≤ n/6` is `2l + 1 ≤ n/3 + 1`.
 This is the form recorded as Question 1 of Problem #883 at erdosproblems.com.
 
-This is an open problem; it is only *stated* here, not proved. -/
+Proved in `ErdosSar.question1` (file `Closure.lean`). -/
 def Question1 : Prop :=
   ∃ n₀ : ℕ, ∀ n ≥ n₀, ∀ A : Finset ℕ, A ⊆ Finset.Icc 1 n → T n < A.card →
     ∀ L : ℕ, Odd L → 3 ≤ L → L ≤ n / 3 + 1 → HasCycleOfLength (coprimeGraph A) L

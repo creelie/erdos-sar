@@ -28,3 +28,9 @@ open ErdosSar
 #print axioms ErdosSar.badBound_of_cert
 #print axioms ErdosSar.bad_550
 #print axioms ErdosSar.bad_950
+#print axioms ErdosSar.gp_cycle
+#print axioms ErdosSar.t_cycle
+#print axioms ErdosSar.gp_box
+#print axioms ErdosSar.t_box
+#print axioms ErdosSar.open_case
+#print axioms ErdosSar.question1
