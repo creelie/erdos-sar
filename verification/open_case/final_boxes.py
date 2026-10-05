@@ -1,5 +1,12 @@
-# Final box design with Lean-faithful certificates (menu of moment exponents, Q=19 signatures).
-import json, sys
+"""Search for the box cover of the open case.
+
+Computes certified density bounds beta(theta) on a grid of thresholds (signatures over the primes
+5..19, the same menu of moment exponents as ErdosSar/Cert.lean), then covers the parameter region by
+boxes: intervals of lambda = mu_T/n for the unit construction and boxes of (delta, a) = (3d/n, mu_6/n)
+for the giant-path construction.  The result is written to boxes.json next to this script, which
+gen_closure.py turns into ErdosSar/Closure.lean.
+"""
+import json, os, sys
 from fractions import Fraction as Fr
 from sympy import primerange
 QP = 19
@@ -109,4 +116,5 @@ for b in tb: print({k: (str(v) if isinstance(v, Fr) else v) for k, v in b.items(
 for b in gb: print({k: (str(v) if isinstance(v, Fr) else v) for k, v in b.items()})
 print({str(g): str(BVr[g]) for g in sorted(used)})
 json.dump(dict(T=[{k: str(v) for k, v in b.items()} for b in tb], GP=[{k: str(v) for k, v in b.items()} for b in gb],
-               beta={str(g): str(BVr[g]) for g in sorted(used)}, FH={m: str(FH[m]) for m in MENU}), open('boxes.json', 'w'), indent=1)
+               beta={str(g): str(BVr[g]) for g in sorted(used)}, FH={m: str(FH[m]) for m in MENU}),
+          open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'boxes.json'), 'w'), indent=1)

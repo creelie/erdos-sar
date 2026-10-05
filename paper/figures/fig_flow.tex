@@ -1,0 +1,34 @@
+% Proof map of Theorem 1.1.
+\begin{tikzpicture}[
+  box/.style={draw=black!70, rounded corners=2pt, align=center, font=\small,
+    inner sep=4pt, fill=#1},
+  box/.default=white,
+  arr/.style={-{Latex[length=2mm]}, black!70}]
+\node[box=black!5, text width=7.8cm] (top) at (0.6,0)
+  {$A\subseteq[n]$, $|A|>T(n)$, $L=2l+1$ odd, $3\le L\le n/3+1$};
+\node[box, text width=3.0cm] (tri) at (-5.0,-1.6)
+  {$l=1$: triangle\\ Theorem~\ref{thm:triangle}};
+\node[box, text width=4.0cm] (split) at (2.0,-1.6)
+  {$l\ge2$; $d=|E^*(n)\setminus A|$};
+\node[box=blue!6, text width=3.0cm] (few) at (-1.6,-3.2)
+  {$70d\le n$\\ Theorem~\ref{thm:few}};
+\node[box, text width=4.0cm] (many) at (4.4,-3.2)
+  {$70d>n$; $\mu_T=|M(n)\setminus A|$};
+\node[box=green!7, text width=3.6cm] (unit) at (2.0,-4.9)
+  {$\mu_T\ge9n/50$: units\\ Proposition~\ref{prop:unit}\\ $3$ intervals};
+\node[box=blue!12, text width=3.6cm] (gp) at (6.2,-4.9)
+  {$\mu_T<9n/50$: giant path\\ Proposition~\ref{prop:gp}\\ $29$ boxes};
+\draw[arr] (top) -- (tri);
+\draw[arr] (top) -- (split);
+\draw[arr] (split) -- (few);
+\draw[arr] (split) -- (many);
+\draw[arr] (many) -- (unit);
+\draw[arr] (many) -- (gp);
+\node[box=black!5, text width=14.2cm] (tools) at (0.6,-6.9)
+  {Common tools: counting in classes modulo $6$ (Lemma~\ref{lem:count}), Jackson's theorem and
+   the assembly lemma (Theorem~\ref{thm:jackson}, Lemma~\ref{lem:assembly}), density bounds
+   (Corollary~\ref{cor:hard}, Theorem~\ref{thm:cert})};
+\draw[arr, dashed] (few.south) -- (few.south |- tools.north);
+\draw[arr, dashed] (unit.south) -- (unit.south |- tools.north);
+\draw[arr, dashed] (gp.south) -- (gp.south |- tools.north);
+\end{tikzpicture}

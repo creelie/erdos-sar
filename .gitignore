@@ -1,3 +1,10 @@
 .lake/
 *.olean
 __pycache__/
+paper/*.aux
+paper/*.log
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.out
+paper/*.toc
+paper/*.synctex.gz

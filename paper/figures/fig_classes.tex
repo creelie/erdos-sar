@@ -1,0 +1,20 @@
+% The residue classes modulo 6 and the pairs of classes that contain coprime pairs.
+\begin{tikzpicture}[
+  cls/.style={circle, draw=black!70, minimum size=15mm, align=center, font=\small, fill=#1},
+  cls/.default=white, e/.style={thick, black!70}]
+\fill[orange!10, rounded corners=8pt] (-0.95,-3.25) rectangle (6.95,-0.95);
+\node[font=\small, orange!60!black] at (4.5,-2.0) {$M(n)$};
+\node[cls=green!10] (U) at (3,1.2) {$U$\\ $\pm1$};
+\node[cls] (O) at (0,-2) {$O_3$\\ $3$};
+\node[cls] (E) at (3,-2) {$E^*$\\ $2,4$};
+\node[cls] (M) at (6,-2) {$M_6$\\ $0$};
+\draw[e] (U) -- (O);
+\draw[e] (U) -- (E);
+\draw[e] (U) -- (M);
+\draw[e] (O) -- (E);
+\draw[e] (U) to[out=60, in=120, looseness=7] (U);
+\node[font=\footnotesize, right=1mm of U] {density $\tfrac13$};
+\node[font=\footnotesize, below=0.5mm of O] {$\tfrac16$};
+\node[font=\footnotesize, below=0.5mm of E] {$\tfrac13$};
+\node[font=\footnotesize, below=0.5mm of M] {$\tfrac16$};
+\end{tikzpicture}

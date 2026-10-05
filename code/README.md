@@ -1,13 +1,26 @@
-# Code accompanying "Odd cycles of every length up to 2o(n)+1 in coprime graphs of sets containing almost all even numbers"
+# Scripts for the paper
 
-Requirements: Python 3, numpy, sympy.
+Run everything from the repository root.
 
-- `constants.py` — computes the moment-bound constants of Lemma 2.4:
-  0.56^40 * Pi_{5,40} <= 5.82e-4 and 0.75^60 * Pi_{11,60} <= 3.09e-4.
-  Product over primes < 10^7 in double precision, plus the explicit tail bound 2m/(P0-1).
-  Run: `python3 constants.py`
-- `bruteforce_small_n.py` — exhaustive check of Question 1 for small n: every A ⊆ [n]
-  with |A| = T(n)+1 has all odd cycles of length <= n/3+1 in its coprime graph.
-  Run: `python3 bruteforce_small_n.py 6 22` (checks n = 6..21; no counterexample).
-- `rho_distribution.py` — empirical distribution of rho'(z) = prod_{p|z, p>=5}(1-1/p) over odd z <= 10^7
-  (sanity check only; not used in the proof).
+- `tables.py`: reads the constants `F̂_m` from `ErdosSar/Cert.lean`, the sixteen certificates from
+  `ErdosSar/Certs.lean` and the boxes from `verification/open_case/boxes.json`, rechecks in exact
+  rational arithmetic every certificate inequality `cert(θ') + 7·10⁻⁶ ≤ β` and every box inequality
+  of Lemmas 8.3 and 8.4, and writes Tables 1 to 4 to `paper/tables/`. Standard library only.
+
+  `python3 code/tables.py`
+
+- `rho_density.c`: sieves `ρ'(z) = ∏_{p | z, p ≥ 5}(1 − 1/p)` for `z ≤ N` and prints, for 121
+  thresholds `θ` from 0.40 to 1.00, the proportion of odd numbers and of units (`z ≡ ±1 mod 6`)
+  with `ρ'(z) < θ`. The output for `N = 10⁸` is `data/rho_density.csv`. These numbers are an
+  illustration for Figure 4 and play no part in the proof.
+
+  `cc -O2 -o /tmp/rho_density code/rho_density.c -lm`
+  `/tmp/rho_density 100000000 > code/data/rho_density.csv`
+
+- `figures.py`: draws `paper/figures/boxes.png` (Figure 9, the box cover) and
+  `paper/figures/densities.png` (Figure 4, certified bounds against the data above). Needs
+  matplotlib.
+
+  `python3 code/figures.py`
+
+The TikZ figures are in `paper/figures/*.tex` and are compiled with the paper.
