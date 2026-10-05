@@ -8,3 +8,4 @@ paper/*.fdb_latexmk
 paper/*.out
 paper/*.toc
 paper/*.synctex.gz
+paper/arxiv.tar.gz

@@ -1,3 +1,4 @@
+\pdfoutput=1
 \documentclass[11pt,a4paper]{article}
 
 \usepackage[T1]{fontenc}
@@ -102,8 +103,8 @@ $3$.\footnote{The extremal role of the multiples of the first primes goes back t
 \cite{Erdos62}. Let $f(n,k)$ be the number of integers in $[n]$ divisible by at least one of the first
 $k$ primes, so that $f(n,2)=T(n)$. Erd\H{o}s asked whether every $A\subseteq[n]$ with $|A|>f(n,k)$
 contains $k+1$ pairwise coprime integers, that is, a complete subgraph on $k+1$ vertices in $G(A)$.
-For $k=2$ the answer is yes (this is Theorem~\ref{thm:triangle} below), while Ahlswede and
-Khachatrian \cite{AK94} showed that the answer is negative for some larger $k$. Erd\H{o}s and
+For $k=2$ the answer is yes (for $n\ge13$ this is Theorem~\ref{thm:triangle} below), while Ahlswede
+and Khachatrian \cite{AK94} showed that the answer is negative for some larger $k$. Erd\H{o}s and
 S\'ark\"ozy \cite{ES97} replaced complete subgraphs by odd cycles.}
 
 Erd\H{o}s and S\'ark\"ozy \cite{ES97} proved that one additional element forces much more than a
@@ -193,17 +194,17 @@ write
 Whether two integers can be coprime is decided by their residues modulo $6$: they cannot be coprime
 when both are even or both are multiples of $3$. Formally, let $c\colon[n]\to\mathbb{Z}/6\mathbb{Z}$
 be reduction modulo $6$, let $\gamma(x,y)=1$ if $\gcd(x,y,6)=1$ and $\gamma(x,y)=0$ otherwise, and
-define $\kappa$ on $(\mathbb{Z}/6\mathbb{Z})^2$ in the same way. Since $\gcd(x,y,6)$ depends only on
+define $\bar\gamma$ on $(\mathbb{Z}/6\mathbb{Z})^2$ in the same way. Since $\gcd(x,y,6)$ depends only on
 $x$ and $y$ modulo $6$, the triangle
 \begin{equation}\label{cd:classes}
 \begin{tikzcd}[column sep=large]
   {[n]\times[n]} \arrow[r, "c\times c"] \arrow[dr, "\gamma"'] & (\mathbb{Z}/6\mathbb{Z})^2
-  \arrow[d, "\kappa"] \\
+  \arrow[d, "\bar\gamma"] \\
   & \{0,1\}
 \end{tikzcd}
 \end{equation}
 commutes, and $\gcd(x,y)=1$ implies $\gamma(x,y)=1$. Figure~\ref{fig:classes} shows the pairs of
-classes on which $\kappa=1$. The classes inside $M(n)$ are joined only by the edge between $O_3$ and
+classes on which $\bar\gamma=1$. The classes inside $M(n)$ are joined only by the edge between $O_3$ and
 $\Es$, which is another way to see that $G(M(n))$ is bipartite and has no triangle.
 
 \begin{figure}[t]
@@ -270,8 +271,11 @@ $P\cup\{q\}$ equals $n|R|\Pi/6-(n/q)|R|\Pi/6$, and $|(n/q)-\lfloor n/q\rfloor|<1
 \[
   E_{P\cup\{q\}}(n)\le E_P(n)+E_P(\lfloor n/q\rfloor)+\frac{|R|}6 ,
 \]
-so that $E_{P\cup\{q\}}(n)+|R|/6\le 2\max_x\big(E_P(x)+|R|/6\big)\le
-2^{|P|+1}\big(c_R+|R|/6\big)$ by the induction hypothesis.
+and the induction hypothesis, applied at $n$ and at $\lfloor n/q\rfloor$, gives
+\[
+  E_{P\cup\{q\}}(n)\le2\Big(\Big(c_R+\frac{|R|}6\Big)2^{|P|}-\frac{|R|}6\Big)+\frac{|R|}6
+  =\Big(c_R+\frac{|R|}6\Big)2^{|P|+1}-\frac{|R|}6. \qedhere
+\]
 \end{proof}
 
 Write $\mathcal{P}(m)$ for the set of primes $p\ge5$ dividing $m$, and
@@ -324,7 +328,8 @@ and only if it is coprime to $a$ and to $b$.
 \end{proof}
 
 \begin{lemma}\label{lem:large}
-Let $N_0=1000\cdot23\cdot2^{22}$ and $N_1=10^6\cdot30\cdot2^{29}$, and let $1\le m\le n^2$. If
+Let $N_0=1000\cdot23\cdot2^{22}$ and $N_1=10^6\cdot30\cdot2^{29}$, and let $1\le m\le
+n^2$. If
 $n\ge N_0$, then $1000(\omega'(m)+1)2^{\omega'(m)}\le n$. If $n\ge N_1$, then
 $10^6(\omega'(m)+1)2^{\omega'(m)}\le n$.
 \end{lemma}
@@ -348,6 +353,11 @@ $2^{\omega'(m)}\le n/10^6$.
 Combine Lemma~\ref{lem:large} with $(\omega'(m)+1)\rho'(m)\ge1$ from Lemma~\ref{lem:rho}(a).
 \end{proof}
 
+No attempt has been made to optimise $N_0$ and $N_1$.\footnote{Numerically
+$N_0=96\,468\,992\,000\approx9.6\cdot10^{10}$ and $N_1\approx1.6\cdot10^{16}$. Both come from the crude
+bound $(\omega'(m)+1)!\le m$ of Lemma~\ref{lem:rho}(a), which keeps the proof free of analytic
+estimates.}
+
 \subsection{Two combinatorial lemmas}
 
 \begin{lemma}\label{lem:pair}
@@ -369,14 +379,17 @@ to $6K+1\ne3$, a contradiction.
 \end{proof}
 
 \begin{lemma}\label{lem:greedy}
-Let $I$ be a finite set with a map $\kappa$ into a linearly ordered set, and for each $i\in I$ let
-$C_i$ be a finite set with $|C_i|\ge\#\{j\in I:\kappa(j)\le\kappa(i)\}$. Then there are pairwise
-distinct elements $w_i\in C_i$ $(i\in I)$.
+Let $I$ be a finite set with a map $\nu$ into a linearly ordered set, and for each $i\in I$ let
+$C_i$ be a finite set with $|C_i|\ge\#\{j\in I:\nu(j)\le\nu(i)\}$. Then there are pairwise
+distinct elements $w_i\in C_i$ $(i\in I)$.\footnote{The conclusion says that the family
+$(C_i)_{i\in I}$ has a system of distinct representatives. Hall's theorem \cite{Hall35} characterises
+such families completely; the hypothesis here implies Hall's condition and allows the
+greedy proof below, which is also the one used in Lean.}
 \end{lemma}
 
 \begin{proof}
-Choose the $w_i$ in order of increasing $\kappa(i)$. When $i$ is reached, the values already chosen
-belong to indices $j\ne i$ with $\kappa(j)\le\kappa(i)$, and there are fewer than $|C_i|$ of them.
+Choose the $w_i$ in order of increasing $\nu(i)$, breaking ties arbitrarily. When $i$ is reached, the values already chosen
+belong to indices $j\ne i$ with $\nu(j)\le\nu(i)$, and there are fewer than $|C_i|$ of them.
 \end{proof}
 
 %======================================================================
@@ -389,7 +402,8 @@ vertices of $X$.
 \end{theorem}
 
 We include a short proof.\footnote{Jackson's theorem belongs to the family of degree conditions for
-long cycles that started with Dirac's theorem on Hamiltonian cycles. Erd\H{o}s and S\'ark\"ozy used
+long cycles that started with Dirac's theorem \cite{Dirac52}: a graph on $N\ge3$ vertices with
+minimum degree at least $N/2$ has a Hamiltonian cycle. Erd\H{o}s and S\'ark\"ozy used
 it in \cite{ES97}, and it is the engine of all constructions in this paper. The argument given here,
 a maximal cycle together with one counting inequality, is the one formalized in Lean.}
 
@@ -586,7 +600,10 @@ The hypotheses hold for the sixteen triples of Table~\ref{tab:cert}.
 \end{theorem}
 
 \begin{proof}
-Fix $n$ and $R$, and let $Y=10^{10}$ and $\eta=10^{-4}$. For $z\le n$ let $S_z$ be the set of primes
+Fix $n$ and $R$, and let $Y=10^{10}$ and $\eta=10^{-4}$. Figure~\ref{fig:ranges}
+summarises the argument.\footnote{The small primes change $\rho'$ the most, so the $64$ signatures over $P_{19}$ are counted
+exactly and only the primes from $23$ on are treated by moments. The number $Y$ enters only through
+the error term $n/(\eta Y)$, while $\eta$ also enters the condition $\theta\le\theta'(1-\eta)$.} For $z\le n$ let $S_z$ be the set of primes
 of $P_{19}$ dividing $z$, let $\mathcal{T}$ be the primes in $[23,Y]$ and $\mathcal{B}$ the primes in
 $(Y,n]$. Splitting the primes of $\mathcal{P}(z)$ into the three ranges, that is,
 $\sigma(z)=(S_z,\,\mathcal{P}(z)\cap\mathcal{T},\,\mathcal{P}(z)\cap\mathcal{B})$, gives the
@@ -594,13 +611,20 @@ commutative diagram
 \begin{equation}\label{cd:split}
 \begin{tikzcd}[column sep=large]
   {[n]} \arrow[r, "\sigma"] \arrow[d, "\mathcal{P}"'] &
-  2^{P_{19}}\times2^{\mathcal{T}}\times2^{\mathcal{B}} \arrow[d, "\pi"] \\
-  2^{\{p\ge5\}} \arrow[r, "\pi_1"'] & (0,1]
+  2^{P_{19}}\times2^{\mathcal{T}}\times2^{\mathcal{B}} \arrow[d, "\psi"] \\
+  2^{\{p\ge5\}} \arrow[r, "\psi_1"'] & (0,1]
 \end{tikzcd}
 \end{equation}
-in which $\pi_1(Q)=\prod_{p\in Q}(1-1/p)$ and $\pi$ sends a triple of disjoint sets to $\pi_1$ of
+in which $\psi_1(Q)=\prod_{p\in Q}(1-1/p)$ and $\psi$ sends a triple of disjoint sets to $\psi_1$ of
 their union;
 hence $\rho'(z)=\rho'(S_z)\,\varphi_\mathcal{T}(z)\,\varphi_\mathcal{B}(z)$.
+
+\begin{figure}[t]
+\centering
+\input{figures/fig_ranges.tex}
+\caption{The three ranges of primes in the proof of Theorem~\ref{thm:cert}.}
+\label{fig:ranges}
+\end{figure}
 
 \emph{Large primes.} We have $\varphi_\mathcal{B}(z)\ge1-\sum_{p\in\mathcal{B},\,p\mid z}1/p$. The
 number of $z\le n$ with $\sum_{p\in\mathcal{B},\,p\mid z}1/p>\eta$ is at most
@@ -653,7 +677,11 @@ also preserves signs, the sixteen inequalities proved over $\mathbb{Q}$ hold ove
 \end{proof}
 
 The number $N$ is finite and determined by the proof; its size plays no role. Figure~\ref{fig:dens}
-compares the certified values with the actual proportions up to $10^8$.
+shows, for comparison, the proportions observed up to $10^8$ next to the certified
+values.\footnote{The certified bound
+exceeds the observed proportion by a factor of about $8$ at $\theta=0.55$, about $4$ at $\theta=0.6$,
+and at most $2.5$ for $\theta\ge0.625$. The loss comes from the moment method; only the certified values enter the proof, and
+the computation behind Figure~\ref{fig:dens} is an illustration.}
 
 \begin{table}[t]
 \centering
@@ -724,6 +752,10 @@ Let $n\ge N_0$ and $A\subseteq[n]$ with $|A|>T(n)$ and $70d\le n$. Then $G(A)$ c
 length $2l+1$ for every integer $l$ with $1\le l\le o(n)$.
 \end{theorem}
 
+The constant $70$ is not critical.\footnote{The proof of Lemma~\ref{lem:degree} needs
+$\frac{14}{75}-\frac{3}{1000}-\frac1c>\frac16$ when $d\le n/c$, that is, $c>1000/17\approx58.8$; the
+other steps need much less.}
+
 Since $\lfloor n/6\rfloor\le o(n)$, this gives Theorem~\ref{thm:main} for these sets. Throughout
 this section $n\ge N_0$, $A$ is as in Theorem~\ref{thm:few}, and all numbers lie in $[n]$. The
 \emph{deficit} of $z$ is $a(z)=|N^*(n,z)\setminus A|\le d$, and $z$ is \emph{undamaged} if
@@ -750,8 +782,9 @@ elements of $N^*(n,m)$ missing from $A$ lie in $N^*(n,z)\setminus A$, so there a
 $a(z)\le(n/8)\rho'(z)$ of them. By Corollary~\ref{cor:large} and Lemma~\ref{lem:rho}(b),
 $2^K\le n\rho'(m)/1000\le n\rho'(z)/1000$; in particular $n\rho'(z)\ge1000$. Hence
 \[
-  |N^*(n,m)\cap A|\ge n\rho'(z)\Big(\frac14-\frac18-\frac1{1000}\Big)\ge2+\frac{n\rho'(z)}{280}. \qedhere
+  |N^*(n,m)\cap A|\ge n\rho'(z)\Big(\frac14-\frac18-\frac1{1000}\Big)\ge2+\frac{n\rho'(z)}{280},
 \]
+the last step because $\frac14-\frac18-\frac1{1000}-\frac1{280}>\frac1{10}$ and $n\rho'(z)\ge1000$.
 \end{proof}
 
 \begin{lemma}\label{lem:degree}
@@ -1044,14 +1077,14 @@ Then $G(A)$ contains a cycle of length $2l+1$.
 \end{lemma}
 
 \begin{proof}
-Let $E=|\Es(n)|$, so $(n-3)/3\le E\le(n+3)/3$, and let $k=\lfloor(E-d+2)/2\rfloor+\lfloor\kappa
+Let $e_n=|\Es(n)|$, so $(n-3)/3\le e_n\le(n+3)/3$, and let $k=\lfloor(e_n-d+2)/2\rfloor+\lfloor\kappa
 n\rfloor$. We check the hypotheses of Proposition~\ref{prop:gp}. (H8) holds by the choice of $k$, and
-$k\ge(E-d+1)/2\ge2$ since $d\le3n/10$. From $k\ge(E-d+1)/2+\kappa n-1\ge n/6-d/2+\kappa n-1$ we get:
+$k\ge(e_n-d+1)/2\ge2$ since $d\le3n/10$. From $k\ge(e_n-d+1)/2+\kappa n-1\ge n/6-d/2+\kappa n-1$ we get:
 if $\kappa\ge\delta_1/6+\eps$, then $k\ge n/6+\eps n-1>l$; so $k<l$ implies $\kappa<\delta_1/6+
 \eps$, and the second group of inequalities is available whenever $k<l$. In every case $l-k+2\le d/2-\kappa
 n+3$.
 
-(H9): $k+d\le(E+2+2\kappa n+d)/2\le n/6+\delta_1n/6+\kappa n+3/2$, and $(n/3)\theta\ge n/6+\delta_1n/6
+(H9): $k+d\le(e_n+2+2\kappa n+d)/2\le n/6+\delta_1n/6+\kappa n+3/2$, and $(n/3)\theta\ge n/6+\delta_1n/6
 +\kappa n+\eps n/3$. (H1), (H2), (H7): by Lemmas~\ref{lem:basic} and \ref{lem:certcount},
 $|\OA(t)|\ge o(n)+1+(\delta_0/3+a_0-\beta/2)n$ for each of the pairs used; this is at least $o(n)+1$ for
 $t=s$ and $t=\theta$, which gives (H1) and (H7) as $l\le\lfloor n/6\rfloor\le o(n)$, and at least
@@ -1062,11 +1095,34 @@ $(l-k-1)+\mu_6\le d/2-\kappa n+a_1n\le(\delta_1/6-\kappa+a_1)n\le(n/6)\theta_ws_
 \end{proof}
 
 The unit boxes used are listed in Table~\ref{tab:tboxes} and the giant-path boxes in
-Table~\ref{tab:gpboxes}; Figure~\ref{fig:boxes} shows the cover. In each row the thresholds $g$ are
+Table~\ref{tab:gpboxes}; Figure~\ref{fig:boxes} shows the cover.\footnote{The boxes were found by a computer search over grids of parameters. The
+search is not part of the proof: each row only has to satisfy the inequalities of
+Lemma~\ref{lem:tbox} or Lemma~\ref{lem:gpbox}, and these are checked exactly.} In each row the thresholds $g$ are
 the smallest certificate thresholds of Table~\ref{tab:cert} that are at least the corresponding
 parameter, and $\beta$ is the certified value at $g$. In mode~II we put $s_w=\min(\theta_w,s)$; in
 mode~I we have $\kappa=\delta_1/6+\eps$, the last three inequalities are not needed, and we put
 $\theta_w=s_w=s$.
+
+As an example, the first row of Table~\ref{tab:tboxes} has $\lambda_0=9/50$, $\lambda_1=23/100$,
+$\theta_T=673/1000$ and $r_1=t_2=33/40$, with the pairs $(0.675,\,353/10000)$ for $\theta_T$ and
+$(0.825,\,1517/5000)$ for $r_1$ and $t_2$. The hypotheses of Lemma~\ref{lem:tbox} read
+\[
+\begin{gathered}
+  \tfrac12+\tfrac34\cdot\tfrac{23}{100}+\eps=\tfrac{673}{1000}=\theta_T,\qquad
+  \tfrac16+\tfrac{353}{30000}+\eps=\tfrac{671}{3750}<\tfrac{9}{50},\qquad
+  \tfrac{1517}{15000}+\eps<\tfrac{9}{50},\\
+  \tfrac{1517}{15000}+\tfrac{7}{120}+\eps=\tfrac{2392}{15000}+\eps<\tfrac{9}{50},\qquad
+  \tfrac{673}{1000}<\tfrac{1089}{1600}=r_1t_2 .
+\end{gathered}
+\]
+The first row of Table~\ref{tab:gpboxes} has $[\delta_0,\delta_1]=
+[3/70,13/140]$, $[a_0,a_1]=[0,1/20]$, $s=\theta_w=s_w=13/20$, $t_1=17/20$, $\kappa=0$ and
+$\theta=\frac12+\frac12\delta_1+\eps=7657/14000$, with certified values $89/5000$ at $0.65$,
+$3457/10000$ at $0.85$ and $3/10000$ at $0.55$. The first of its nine inequalities holds with equality by
+the choice of $\theta$, and $s_w\le\theta_w$ is clear. In the other seven the left sides are
+$0.0094$, $0.17335$, $0.5469$, $0.0934$, $0.00065$, $0.0064$ and $0.0660$ (rounded), against the right
+sides $1/70\approx0.0143$, $1/6+1/70\approx0.1810$, $t_1s=0.5525$, $t_1s_w=0.5525$, $1/70$,
+$1/140\approx0.0071$ and $\theta_ws_w/6\approx0.0704$.
 
 \begin{table}[t]
 \centering
@@ -1130,7 +1186,10 @@ the hypotheses of Lemma~\ref{lem:gpbox}. In all cases $G(A)$ contains a cycle of
 The Lean development consists of $28$ files and about $6600$ lines; it builds with Lean~4.34.1 and
 Mathlib~4.34.1. The coprime graph is defined in Mathlib's graph library: the vertices are the
 elements of a finite set $A\subseteq\mathbb{N}$, two vertices are adjacent when they are distinct and
-coprime, and a cycle of length $L$ is a closed walk of length $L$ without repeated vertices or edges.
+coprime, and a cycle of length $L$ is a closed walk of length $L$ that repeats no edge and no vertex
+other than its starting point.\footnote{This is Mathlib's notion \texttt{SimpleGraph.Walk.IsCycle}.
+Such a walk has length at least $3$, and its vertices, read in order, form a sequence
+$v_1,\dots,v_L$ as in the definition given in the introduction.}
 The statement proved is
 \par\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}[style=lean]
@@ -1171,7 +1230,7 @@ Zenodo\ifx\zenodoDOI\empty.\else, \href{https://doi.org/\zenodoDOI}{doi:\zenodoD
 \section*{Acknowledgments}
 Claude (Anthropic) assisted Deep Bhattacharjee in Python, C and Lean coding.
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{10}
 \small
 \bibitem{AK94} R. Ahlswede, L. H. Khachatrian, On extremal sets without coprimes, \emph{Acta
 Arith.}, \textbf{66} (1994), 89--99. \url{https://doi.org/10.4064/aa-66-1-89-99}
@@ -1179,11 +1238,17 @@ Arith.}, \textbf{66} (1994), 89--99. \url{https://doi.org/10.4064/aa-66-1-89-99}
 \bibitem{Bloom} T. F. Bloom, Erd\H{o}s Problem \#883, \emph{Erd\H{o}s Problems}.
 \url{https://www.erdosproblems.com/883}
 
+\bibitem{Dirac52} G. A. Dirac, Some theorems on abstract graphs, \emph{Proc. London Math. Soc.
+(3)}, \textbf{2} (1952), 69--81. \url{https://doi.org/10.1112/plms/s3-2.1.69}
+
 \bibitem{Erdos62} P. Erd\H{o}s, Remarks in number theory. IV. Extremal problems in number theory. I
 (Hungarian), \emph{Mat. Lapok}, \textbf{13} (1962), 228--255.
 
 \bibitem{ES97} P. Erd\H{o}s, G. N. S\'ark\"ozy, On cycles in the coprime graph of integers,
 \emph{Electron. J. Combin.}, \textbf{4} (1997), no. 2, R8. \url{https://doi.org/10.37236/1323}
+
+\bibitem{Hall35} P. Hall, On representatives of subsets, \emph{J. London Math. Soc.}, \textbf{10}
+(1935), 26--30. \url{https://doi.org/10.1112/jlms/s1-10.37.26}
 
 \bibitem{Jackson81} B. Jackson, Cycles in bipartite graphs, \emph{J. Combin. Theory Ser. B},
 \textbf{30} (1981), 332--342. \url{https://doi.org/10.1016/0095-8956(81)90050-2}

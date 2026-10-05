@@ -1,0 +1,16 @@
+% The three ranges of primes in the proof of Theorem 4.4 and how each factor of rho' is treated.
+\begin{tikzpicture}[
+  seg/.style={draw=black!70, rounded corners=2pt, minimum height=9mm, minimum width=4.5cm,
+    align=center, font=\small, fill=#1},
+  note/.style={font=\footnotesize, align=center, text width=4.4cm}]
+\node[seg=green!8] (A) at (0,0) {$p\in P_{19}=\{5,7,11,13,17,19\}$};
+\node[seg=blue!8] (B) at (4.8,0) {$p\in\mathcal{T}$:\ $23\le p\le10^{10}$};
+\node[seg=orange!10] (C) at (9.6,0) {$p\in\mathcal{B}$:\ $10^{10}<p\le n$};
+\node[font=\small, above=3mm of B] {$\rho'(z)=\rho'(S_z)\,\varphi_\mathcal{T}(z)\,\varphi_\mathcal{B}(z)$};
+\node[note, below=2mm of A] {factor $\rho'(S_z)$: the $64$ signatures $S$ are counted exactly with
+  Lemma~\ref{lem:count}};
+\node[note, below=2mm of B] {factor $\varphi_\mathcal{T}(z)$: Rankin's moment bound with an exponent
+  $m_S\in\mathcal{M}$ chosen for each $S$};
+\node[note, below=2mm of C] {factor $\varphi_\mathcal{B}(z)\ge1-10^{-4}$ for all but at most
+  $n/10^6$ integers $z\le n$};
+\end{tikzpicture}
