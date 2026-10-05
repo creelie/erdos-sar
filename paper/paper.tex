@@ -159,7 +159,7 @@ axioms a theorem depends on; for Theorem~\ref{thm:main} the list consists of pro
 extensionality, the axiom of choice and the soundness of quotients, which every development based on
 Mathlib uses. The numerical certificates are evaluated by the kernel's own reduction
 (\texttt{decide +kernel}) and do not rely on compiled code.} The text follows the formal proof step
-by step, and Table~\ref{tab:lean} gives the Lean name of each result.
+by step.
 
 \begin{figure}[t]
 \centering
@@ -1149,53 +1149,7 @@ inequality \eqref{eq:F5}, its analogue for $F_{11}(54)$, the bounds for $\hat F_
 certificates are evaluated in exact rational arithmetic by \texttt{decide +kernel}, and the box
 inequalities by the tactic \texttt{norm\_num}. The file \texttt{Closure.lean}, which contains the case
 analysis of Section~\ref{sec:boxes}, is generated from the box data by a script and is checked by Lean
-like every other file. Table~\ref{tab:lean} lists the correspondence.
-
-\begin{table}[t]
-\centering
-\small
-\caption{Results of the paper and the corresponding Lean theorems (namespace \texttt{ErdosSar}).}
-\label{tab:lean}
-\footnotesize
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lll}
-\toprule
-Result & Lean theorem & File \\
-\midrule
-Lemma~\ref{lem:odd} & \texttt{card\_odd\_ge} & \texttt{Triangle.lean} \\
-Lemma~\ref{lem:count} & \texttt{abs\_Cnt\_sub\_mainTerm\_le}, \texttt{abs\_CntR\_sub\_mainTermR\_le} &
-  \texttt{Counting(R).lean} \\
-Corollary~\ref{cor:count} & \texttt{abs\_card\_Nstar\_sub\_le}, \texttt{abs\_card\_class\_coprime\_sub\_le}
-  & \texttt{Rho.lean}, \texttt{CountingR.lean} \\
-Lemma~\ref{lem:rho} & \texttt{rho\_ge}, \texttt{rho\_le\_of\_dvd}, \texttt{rho\_lcm\_ge} &
-  \texttt{Rho.lean}, \texttt{Setup.lean} \\
-Lemma~\ref{lem:large} & \texttt{large\_n}, \texttt{large\_n\_big} & \texttt{LargeN.lean},
-  \texttt{OpenSetup.lean} \\
-Lemma~\ref{lem:pair} & \texttt{coprime\_pair} & \texttt{CoprimePair.lean} \\
-Lemma~\ref{lem:greedy} & \texttt{greedy\_choice} & \texttt{Greedy.lean} \\
-Theorem~\ref{thm:jackson} & \texttt{Jackson.jackson} & \texttt{Jackson.lean} \\
-Lemma~\ref{lem:assembly} & \texttt{assembly} & \texttt{Assembly.lean} \\
-Lemma~\ref{lem:moment} & \texttt{card\_phiT\_le}, \texttt{card\_Zset\_phiT\_le} & \texttt{Moment.lean},
-  \texttt{Cert.lean} \\
-Lemma~\ref{lem:tail} & \texttt{gm\_le}, \texttt{prod\_primesIn\_le} & \texttt{HardCount.lean} \\
-Corollary~\ref{cor:hard} & \texttt{card\_rho\_le}, \texttt{card\_nonEasy\_le} &
-  \texttt{HardCount.lean}, \texttt{Setup.lean} \\
-Theorem~\ref{thm:cert} & \texttt{badBound\_of\_cert}, \texttt{bad\_550}, \dots, \texttt{bad\_950} &
-  \texttt{Cert(s).lean} \\
-Theorem~\ref{thm:triangle} & \texttt{triangle} & \texttt{Triangle.lean} \\
-Lemmas~\ref{lem:damaged}--\ref{lem:choose} & \texttt{card\_damaged\_le}, \texttt{NA\_card\_master},
-  \texttt{deg\_master}, \texttt{exists\_X1} & \texttt{Setup.lean}, \texttt{Main.lean} \\
-Theorem~\ref{thm:few} & \texttt{paperTheorem\_holds}, \texttt{long\_cycle} & \texttt{Main.lean}, \texttt{LongCycle.lean} \\
-Lemma~\ref{lem:countbig} & \texttt{card\_Nstar\_ge\_big}, \texttt{card\_class\_coprime\_ge\_big} &
-  \texttt{OpenSetup.lean} \\
-Proposition~\ref{prop:unit} & \texttt{t\_cycle} & \texttt{SchemeT.lean} \\
-Proposition~\ref{prop:gp} & \texttt{gp\_cycle} & \texttt{SchemeGP.lean} \\
-Lemmas~\ref{lem:basic}--\ref{lem:gpbox} & \texttt{open\_counts}, \texttt{card\_Good\_ge},
-  \texttt{t\_box}, \texttt{gp\_box} & \texttt{Boxes.lean} \\
-Theorem~\ref{thm:main} & \texttt{question1} & \texttt{Closure.lean} \\
-\bottomrule
-\end{tabular}
-\end{table}
+like every other file.
 
 The repository also contains the scripts that reproduce every number and figure of this paper: the
 box search and the generator of \texttt{Closure.lean} (Python), the tables, which are recomputed in

@@ -35,11 +35,8 @@ certificates. The certificate thresholds are finite but not computed explicitly.
 | Theorem 6.1 | `n ≥ N₀ = 1000·23·2²²`, `\|A\| > T(n)`, and `A` misses at most `n/70` of the numbers `≡ 2, 4 (mod 6)`: a cycle of length `2l+1` for every `1 ≤ l ≤ o(n)` | `paperTheorem_holds`, `question1_restricted` |
 | Proposition 7.2 | unit construction | `t_cycle` |
 | Proposition 7.3 | giant-path construction | `gp_cycle` |
-| Theorem 4.4 | sixteen density certificates | `badBound_of_cert`, `bad_550` … `bad_950` |
 | Theorem 3.1 | Jackson's theorem on cycles in bipartite graphs | `Jackson.jackson` |
 | Section 1 | `T(n)` is sharp; odd cycles need `(L+1)/2` odd vertices | `card_M23`, `not_hasCycle3_M23`, `odd_cycle_length_bound` |
-
-Table 5 of the paper lists the Lean name of every lemma.
 
 ## How the proof goes
 
