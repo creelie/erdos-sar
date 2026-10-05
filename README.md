@@ -110,3 +110,7 @@ reproduce the committed files.
 
 Deep Bhattacharjee, Priyabrata Mandal (corresponding author, priyabrata@manit.ac.in) and
 Shounak Bhattacharya.
+
+## License
+
+CC BY 4.0, see `LICENSE`. Archive metadata for Zenodo is in `.zenodo.json`.

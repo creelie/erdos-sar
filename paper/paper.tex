@@ -41,7 +41,8 @@
 \newcommand{\OA}{\mathcal{O}_A}
 \newcommand{\UA}{\mathcal{U}_A}
 \newcommand{\cert}{\operatorname{cert}}
-\newcommand{\zenodoDOI}{10.5281/zenodo.XXXXXXX}
+% Zenodo DOI of the archived repository; leave empty until it is minted.
+\def\zenodoDOI{}
 \makeatletter\let\tableinput\@@input\makeatother
 
 \lstdefinestyle{lean}{basicstyle=\ttfamily\footnotesize, columns=fullflexible, keepspaces=true,
@@ -1210,8 +1211,8 @@ The authors declare no conflict of interest.
 
 \section*{Data availability}
 The Lean source code, the scripts and the data supporting this article are openly available at
-\url{https://github.com/creelie/erdos-sar} and archived at Zenodo,
-\href{https://doi.org/\zenodoDOI}{doi:\zenodoDOI}.
+\url{https://github.com/creelie/erdos-sar} and archived at
+Zenodo\ifx\zenodoDOI\empty.\else, \href{https://doi.org/\zenodoDOI}{doi:\zenodoDOI}.\fi
 
 \section*{Acknowledgments}
 Claude (Anthropic) assisted Deep Bhattacharjee in Python, C and Lean coding.

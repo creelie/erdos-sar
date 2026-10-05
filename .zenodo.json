@@ -1,0 +1,54 @@
+{
+  "upload_type": "software",
+  "title": "Odd cycles in coprime graphs: an answer to a question of Erdős and Sárközy. Lean 4 proof, paper and scripts",
+  "version": "1.0.0",
+  "creators": [
+    {
+      "name": "Bhattacharjee, Deep",
+      "affiliation": "Formerly, Electro-Gravitational Space Propulsion Laboratory (EGSPL), Bhubaneswar, Odisha 751030, India",
+      "orcid": "0000-0003-0466-750X"
+    },
+    {
+      "name": "Mandal, Priyabrata",
+      "affiliation": "Department of Mathematics, Bioinformatics and Computer Applications, Maulana Azad National Institute of Technology Bhopal, Bhopal 462003, India",
+      "orcid": "0000-0001-6472-6239"
+    },
+    {
+      "name": "Bhattacharya, Shounak",
+      "affiliation": "Asian College of Teachers, Kolkata, West Bengal, India"
+    }
+  ],
+  "description": "<p>We prove that for every sufficiently large <i>n</i>, every set <i>A</i> &sube; {1, &hellip;, <i>n</i>} with more than &lfloor;<i>n</i>/2&rfloor; + &lfloor;<i>n</i>/3&rfloor; &minus; &lfloor;<i>n</i>/6&rfloor; elements has a coprime graph containing cycles of all odd lengths from 3 to <i>n</i>/3 + 1. This answers Question 1 of Erd&#337;s Problem 883, posed by Erd&#337;s and S&aacute;rk&ouml;zy.</p><p>The archive contains the complete Lean 4 proof (theorem <code>ErdosSar.question1</code>, Lean 4.34.1 with Mathlib 4.34.1), whose axioms are only <code>propext</code>, <code>Classical.choice</code> and <code>Quot.sound</code>, with no <code>sorry</code> and no <code>native_decide</code>; the paper with its LaTeX source, TikZ figures and generated tables; and the Python and C scripts that reproduce every table and figure.</p>",
+  "keywords": [
+    "coprime graph",
+    "odd cycles",
+    "formal verification",
+    "Lean 4",
+    "Mathlib",
+    "Erdős problems"
+  ],
+  "license": "cc-by-4.0",
+  "access_right": "open",
+  "language": "eng",
+  "related_identifiers": [
+    {
+      "identifier": "10.37236/1323",
+      "relation": "references",
+      "resource_type": "publication-article",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "https://www.erdosproblems.com/883",
+      "relation": "references",
+      "scheme": "url"
+    }
+  ],
+  "references": [
+    "P. Erdős, G. N. Sárközy, On cycles in the coprime graph of integers, Electron. J. Combin. 4 (1997), no. 2, R8. https://doi.org/10.37236/1323",
+    "B. Jackson, Cycles in bipartite graphs, J. Combin. Theory Ser. B 30 (1981), 332-342. https://doi.org/10.1016/0095-8956(81)90050-2",
+    "R. A. Rankin, The difference between consecutive prime numbers, J. London Math. Soc. 13 (1938), 242-247. https://doi.org/10.1112/jlms/s1-13.4.242",
+    "R. Ahlswede, L. H. Khachatrian, On extremal sets without coprimes, Acta Arith. 66 (1994), 89-99. https://doi.org/10.4064/aa-66-1-89-99",
+    "L. de Moura, S. Ullrich, The Lean 4 theorem prover and programming language, CADE 28, LNCS 12699 (2021), 625-635. https://doi.org/10.1007/978-3-030-79876-5_37",
+    "The mathlib Community, The Lean mathematical library, CPP 2020, 367-381. https://doi.org/10.1145/3372885.3373824"
+  ]
+}
