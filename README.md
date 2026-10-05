@@ -1,5 +1,7 @@
 # Erdős Problem #883: odd cycles in coprime graphs
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23151794.svg)](https://doi.org/10.5281/zenodo.23151794)
+
 For a finite set `A` of positive integers, the coprime graph `G(A)` has vertex set `A`, two
 distinct elements being adjacent when they are coprime. Let
 `T(n) = ⌊n/2⌋ + ⌊n/3⌋ − ⌊n/6⌋`, the number of multiples of 2 or 3 in `[1, n]`.
@@ -110,4 +112,9 @@ Shounak Bhattacharya.
 
 ## License
 
-CC BY 4.0, see `LICENSE`. Archive metadata for Zenodo is in `.zenodo.json`.
+CC BY 4.0, see `LICENSE`.
+
+## Citation
+
+The repository is archived at Zenodo, [doi:10.5281/zenodo.23151794](https://doi.org/10.5281/zenodo.23151794).
+The archive metadata is in `.zenodo.json`.

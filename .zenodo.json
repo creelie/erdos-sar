@@ -1,7 +1,7 @@
 {
   "upload_type": "software",
   "title": "Odd cycles in coprime graphs: an answer to a question of Erdős and Sárközy. Lean 4 proof, paper and scripts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "creators": [
     {
       "name": "Bhattacharjee, Deep",
