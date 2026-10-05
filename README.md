@@ -1,6 +1,6 @@
 # Erdős Problem #883: odd cycles in coprime graphs
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23151794.svg)](https://doi.org/10.5281/zenodo.23151794)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23152776.svg)](https://doi.org/10.5281/zenodo.23152776)
 
 For a finite set `A` of positive integers, the coprime graph `G(A)` has vertex set `A`, two
 distinct elements being adjacent when they are coprime. Let
@@ -116,5 +116,10 @@ CC BY 4.0, see `LICENSE`.
 
 ## Citation
 
-The repository is archived at Zenodo, [doi:10.5281/zenodo.23151794](https://doi.org/10.5281/zenodo.23151794).
-The archive metadata is in `.zenodo.json`.
+The repository is archived at Zenodo:
+
+- v1.0.1 (current paper): [doi:10.5281/zenodo.23152776](https://doi.org/10.5281/zenodo.23152776)
+- v1.0.0: [doi:10.5281/zenodo.23151794](https://doi.org/10.5281/zenodo.23151794)
+
+Both versions contain the same Lean proof; the paper cites the v1.0.0 record. The archive
+metadata is in `.zenodo.json`.
