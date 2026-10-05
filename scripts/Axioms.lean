@@ -24,3 +24,7 @@ open ErdosSar
 #print axioms ErdosSar.cycle_seven
 #print axioms ErdosSar.paperTheorem_holds
 #print axioms ErdosSar.question1_restricted
+#print axioms ErdosSar.card_bad_le
+#print axioms ErdosSar.badBound_of_cert
+#print axioms ErdosSar.bad_550
+#print axioms ErdosSar.bad_950
