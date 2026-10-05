@@ -17,3 +17,4 @@ import ErdosSar.Setup
 import ErdosSar.LongCycle
 import ErdosSar.Short
 import ErdosSar.Main
+import ErdosSar.CountingR

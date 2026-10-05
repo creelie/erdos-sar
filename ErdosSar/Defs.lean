@@ -34,6 +34,12 @@ def HasCycleOfLength {V : Type*} (G : SimpleGraph V) (L : ℕ) : Prop :=
 `A ⊆ [1, n]` with `|A| > T n` has a coprime graph containing every odd cycle of
 length at most `n/3 + 1`. (For integer `L`, `L ≤ n/3 + 1` is `L - 1 ≤ ⌊n/3⌋`.)
 
+Source: P. Erdős and G. N. Sárközy, *On cycles in the coprime graph of integers*,
+Electron. J. Combin. 4(2) (1997), R8, doi:10.37236/1323. Their main theorem gives constants
+`c, n₀` such that for `n ≥ n₀`, `A ⊆ [1, n]`, `|A| > T n`, the graph contains `C_{2l+1}` for every
+`l ≤ c n`, and they ask whether `c = 1/6` is admissible; `l ≤ n/6` is `2l + 1 ≤ n/3 + 1`.
+This is the form recorded as Question 1 of Problem #883 at erdosproblems.com.
+
 This is an open problem; it is only *stated* here, not proved. -/
 def Question1 : Prop :=
   ∃ n₀ : ℕ, ∀ n ≥ n₀, ∀ A : Finset ℕ, A ⊆ Finset.Icc 1 n → T n < A.card →
